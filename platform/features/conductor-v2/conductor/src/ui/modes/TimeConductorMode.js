@@ -33,9 +33,9 @@ define(
          * @constructor
          * @param {TimeConductorMetadata} metadata
          */
-        function TimeConductorMode(key, conductor, availableTimeSystems) {
+        function TimeConductorMode(key, conductor, timeSystems) {
             this.conductor = conductor;
-            this._availableTimeSystems = availableTimeSystems;
+            this._timeSystems = timeSystems;
             this._key = key;
         }
 
@@ -54,7 +54,7 @@ define(
         };
 
         TimeConductorMode.prototype.availableTimeSystems = function (timeSystem) {
-            return this._availableTimeSystems;
+            return this._timeSystems;
         };
 
         TimeConductorMode.prototype.key = function () {

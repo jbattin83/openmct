@@ -33,12 +33,23 @@ define(
          * the mode relevant, with both offsets defined relative to it.
          * @constructor
          */
-        function FollowMode(key, conductor, availableTimeSystems) {
-            TimeConductorMode.call(this, key, conductor, availableTimeSystems);
+        function FollowMode(key, conductor, timeSystems) {
+            TimeConductorMode.call(this, key, conductor, timeSystems);
 
             this._deltas = undefined;
             this._tickSource = undefined;
             this._tickSourceUnlisten = undefined;
+
+            var tickSourceType = {
+                'realtime': 'clock',
+                'latest': 'data'
+            }[key];
+
+            this._availableTimeSystems = timeSystems.filter(function (timeSystem){
+                return timeSystem.tickSources().some(function (tickSource){
+                    return tickSource.type() === tickSourceType;
+                });
+            });
         }
 
         FollowMode.prototype = Object.create(TimeConductorMode.prototype);
@@ -137,6 +148,14 @@ define(
             if (this._tickSourceUnlisten) {
                 this._tickSourceUnlisten();
             }
+        };
+
+        /**
+         * Returns the time systems available for this follow mode
+         * @returns {*}
+         */
+        FollowMode.prototype.availableTimeSystems = function () {
+            return this._availableTimeSystems;
         };
 
         return FollowMode;

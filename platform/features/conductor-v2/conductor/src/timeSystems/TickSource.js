@@ -50,7 +50,7 @@ define([], function () {
      */
     TickSource.prototype.type = function () {
         throw new Error('Not implemented');
-    }
+    };
 
     return TickSource;
 });

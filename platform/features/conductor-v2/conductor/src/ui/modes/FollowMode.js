@@ -97,7 +97,16 @@ define(
             TimeConductorMode.prototype.changeTimeSystem.apply(this, arguments);
 
             if (arguments.length > 0) {
-                var defaults = this.defaults();
+                var defaults = timeSystem.defaults() || {
+                        bounds: {
+                            start: 0,
+                            end: 0
+                        },
+                        deltas: {
+                            start: 0,
+                            end: 0
+                        }
+                    };
                 var bounds = {
                     start: defaults.bounds.start,
                     end: defaults.bounds.end

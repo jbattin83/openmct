@@ -61,17 +61,6 @@ define(
             return this._key;
         };
 
-        TimeConductorMode.prototype.defaults = function () {
-            var timeSystem = this.conductor.timeSystem(),
-                key = this.key();
-
-            if (timeSystem) {
-                return timeSystem.defaults(key);
-            } else {
-                return {bounds: {start: 0, end: 0}};
-            }
-        };
-
         TimeConductorMode.prototype.destroy = function () {
         };
 

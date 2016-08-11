@@ -50,7 +50,12 @@ define(
          */
         FixedMode.prototype.changeTimeSystem = function (timeSystem){
             if (timeSystem) {
-                var defaults = this.defaults();
+                var defaults = timeSystem.defaults() || {
+                        bounds: {
+                            start: 0,
+                            end: 0
+                        }
+                    };
 
                 var bounds = {
                     start: defaults.bounds.start,
